@@ -1,0 +1,173 @@
+<div class="min-h-screen flex flex-col items-center justify-center mt-16">
+  <h1 class="my-5 text-center text-4xl font-semibold text-sky-500">the fakebook</h1>
+  <div class="bg-white shadow-lg rounded-xl p-8 max-w-2xl w-full">
+    <h2 class="text-2xl text-sky-500 py-3">Register Now</h2>
+    <form [formGroup]="registerForm" (ngSubmit)="signUp()" class="space-y-6">
+      <div class="mb-6">
+        <input
+          type="text"
+          id="name"
+          formControlName="name"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+          placeholder="Type your name.."
+          required
+        />
+        @let nameControl = registerForm.get('name');
+        @if (nameControl?.invalid && nameControl?.touched) {
+          <ul>
+            @if (nameControl?.hasError('required')) {
+              <li class="text-red-500 text-sm">Name is required.</li>
+            }
+            @if (nameControl?.hasError('minlength')) {
+              <li class="text-red-500 text-sm">Name must be at least 3 characters long.</li>
+            }
+            @if (nameControl?.hasError('maxlength')) {
+              <li class="text-red-500 text-sm">Name must be less than 50 characters long.</li>
+            }
+          </ul>
+        }
+      </div>
+      <div class="mb-6">
+        <input
+          type="email"
+          id="email"
+          formControlName="email"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+          placeholder="Type your email.."
+          required
+        />
+        @let emailControl = registerForm.get('email');
+        @if (emailControl?.invalid && emailControl?.touched) {
+          <ul>
+            @if (emailControl?.hasError('required')) {
+              <li class="text-red-500 text-sm">Email is required.</li>
+            }
+            @if (emailControl?.hasError('email')) {
+              <li class="text-red-500 text-sm">Please enter a valid email address.</li>
+            }
+          </ul>
+        }
+      </div>
+      <div class="mb-6">
+        <label for="password" class="block mb-2.5 text-sm font-medium text-heading">Password</label>
+        <input
+          type="password"
+          id="password"
+          formControlName="password"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+          placeholder="•••••••••"
+          required
+        />
+        @let passwordControl = registerForm.get('password');
+        @if (passwordControl?.invalid && passwordControl?.touched) {
+          <ul>
+            @if (passwordControl?.hasError('required')) {
+              <li class="text-red-500 text-sm">Password is required.</li>
+            }
+            @if (passwordControl?.hasError('pattern')) {
+              <li class="text-red-500 text-sm">
+                Password must contain at least one uppercase letter, one lowercase letter, one
+                number, and one special character.
+              </li>
+            }
+          </ul>
+        }
+      </div>
+      <div class="mb-6">
+        <label for="confirm_password" class="block mb-2.5 text-sm font-medium text-heading"
+          >Confirm password</label
+        >
+        <input
+          type="password"
+          id="confirm_password"
+          formControlName="rePassword"
+          class="bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand block w-full px-3 py-2.5 shadow-xs placeholder:text-body"
+          placeholder="•••••••••"
+          required
+        />
+        @let rePasswordControl = registerForm.get('rePassword');
+        @if (
+          (rePasswordControl?.invalid || registerForm.hasError('mismatch')) &&
+          rePasswordControl?.touched
+        ) {
+          <ul>
+            @if (rePasswordControl?.hasError('required')) {
+              <li class="text-red-500 text-sm">Confirm password is required.</li>
+            }
+            @if (registerForm.hasError('mismatch')) {
+              <li class="text-red-500 text-sm">Passwords do not match.</li>
+            }
+          </ul>
+        }
+      </div>
+      <div class="relative max-w-sm mb-6">
+        <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+          <svg
+            class="w-4 h-4 text-body"
+            aria-hidden="true"
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            fill="none"
+            viewBox="0 0 24 24"
+          >
+            <path
+              stroke="currentColor"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 10h16m-8-3V4M7 7V4m10 3V4M5 20h14a1 1 0 0 0 1-1V7a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1Zm3-7h.01v.01H8V13Zm4 0h.01v.01H12V13Zm4 0h.01v.01H16V13Zm-8 4h.01v.01H8V17Zm4 0h.01v.01H12V17Zm4 0h.01v.01H16V17Z"
+            />
+          </svg>
+        </div>
+        <input
+          datepicker
+          id="default-datepicker"
+          formControlName="dateOfBirth"
+          type="text"
+          class="block w-full ps-9 pe-3 py-2.5 bg-neutral-secondary-medium border border-default-medium text-heading text-sm rounded-base focus:ring-brand focus:border-brand px-3 shadow-xs placeholder:text-body"
+          placeholder="Date of Birth"
+        />
+      </div>
+      <div class="md-6 flex flex-row gap-4 py-3">
+        <div class="flex items-center">
+          <input
+            id="default-radio-1"
+            type="radio"
+            value="male"
+            name="gender"
+            formControlName="gender"
+            class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border appearance-none"
+          />
+          <label for="default-radio-1" class="select-none ms-2 text-sm font-medium text-heading"
+            >Male</label
+          >
+        </div>
+        <div class="flex items-center">
+          <input
+            checked
+            id="default-radio-2"
+            type="radio"
+            value="female"
+            name="gender"
+            formControlName="gender"
+            class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border appearance-none"
+          />
+          <label for="default-radio-2" class="select-none ms-2 text-sm font-medium text-heading"
+            >Female</label
+          >
+        </div>
+      </div>
+      <button
+        type="submit"
+        [disabled]="registerForm.invalid"
+        class="text-white bg-sky-500 box-border border border-transparent hover:bg-sky-600 focus:ring-4 focus:ring-sky-300 shadow-xs font-medium leading-5 rounded-base text-sm px-4 py-2.5 focus:outline-none disabled:cursor-not-allowed disabled:bg-sky-200"
+      >
+        Sign Up
+        @if (isLoading) {
+          <span><i class="fa-solid fa-spinner fa-spin"></i></span>
+        }
+      </button>
+    </form>
+  </div>
+</div>

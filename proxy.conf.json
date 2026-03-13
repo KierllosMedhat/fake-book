@@ -1,0 +1,8 @@
+{
+  "/api": {
+    "target": "https://route-posts.routemisr.com",
+    "secure": true,
+    "changeOrigin": true,
+    "logLevel": "debug"
+  }
+}

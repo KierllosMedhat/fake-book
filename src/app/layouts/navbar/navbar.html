@@ -1,0 +1,75 @@
+<nav class="bg-sky-500 fixed w-full z-20 top-0 border-b border-default">
+  <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
+    <a routerLink="/timeline" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <span class="self-center text-3xl text-white font-bold whitespace-nowrap font-sans">fakebook</span>
+    </a>
+    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+      <button
+        type="button"
+        class="flex text-sm bg-sky-500 rounded-full md:me-0 focus:ring-4 focus:ring-sky-300"
+        id="user-menu-button"
+        aria-expanded="false"
+        data-dropdown-toggle="user-dropdown"
+        data-dropdown-placement="bottom"
+      >
+        <span class="sr-only">Open user menu</span>
+        <img class="w-10 h-10 rounded-full shadow-lg" src="user.png" alt="user photo" />
+      </button>
+      <!-- Dropdown menu -->
+      <div
+        class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
+        id="user-dropdown"
+      >
+       @if (isLoggedIn){
+         <div class="px-4 py-3 text-sm border-b border-default">
+           <span class="block text-heading font-medium">user</span>
+           <span class="block text-body truncate">user@linkedposts.com</span>
+         </div>
+       }
+        <ul class="p-2 text-sm text-body font-medium" aria-labelledby="user-menu-button">
+          @if (isLoggedIn) {
+            <li>
+              <a
+                [routerLink]="'/profile'"
+                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                >Profile</a
+              >
+            </li>
+
+            <li>
+              <a
+                (click)="logOut()"
+                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:cursor-pointer hover:text-heading rounded"
+                >Sign Out</a
+              >
+            </li>
+            <li>
+              <a [routerLink]="'/change-password'" 
+                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                >Change Password
+              </a>
+            </li>
+          }
+          @if (!isLoggedIn) {
+            <li>
+              <a
+                [routerLink]="'/signin'"
+                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                >Sign In</a
+              >
+            </li>
+            
+
+            <li>
+              <a
+                [routerLink]="'/signup'"
+                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                >Register</a
+              >
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>

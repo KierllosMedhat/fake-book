@@ -1,0 +1,19 @@
+@for (comment of commentList; track comment._id) {
+<section class="p-2 rounded-lg shadow-lg border-gray-50 bg-stone-300 mb-4">
+    <div class="flex justify-between bg-white p-2 rounded-lg">
+        <div class="flex gap-x-2 items-center">
+            <div>
+                <img [src]="comment.commentCreator.photo" alt="user profile" class="size-12 rounded-full bg-stone-300 shadow-lg border-stone-700">
+            </div>
+            <div>
+                <h3 class="text-gray-500 font-bold">{{ comment.commentCreator.name }}</h3>
+                <h6 class="text-gray-500">{{ comment.createdAt}}</h6>
+            </div>
+        </div>
+        <div>
+            <i class="fa-solid fa-ellipsis"></i>    
+        </div>
+    </div>
+    <p class="text-gray-600 px-3 py-2 bg-white rounded-lg mt-2">{{ comment.content }}</p>
+</section>
+}

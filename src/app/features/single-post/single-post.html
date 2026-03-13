@@ -1,0 +1,44 @@
+@for (post of postsList; track post.id) {
+    <section class="rounded-lg bg-white p-4 my-2 w-1/2 sm:w-4/5 md:w-1/2 mx-auto">
+    <div class="flex flex-col">
+        <div class="flex gap-2 justify-between">
+            <div class="flex items-center gap-2">
+                <img [src]="post.user.photo" alt="user profile" class="size-12 rounded-full">
+                <div>
+                    <h3 class="font-bold">{{post.user.name}}</h3>
+                    <p class="text-sm text-gray-500">{{post.createdAt | date:'short'}}</p>
+                </div>
+            </div>
+            <div>
+                <i class="fa-solid fa-ellipsis"></i>
+            </div>
+        </div>
+        <div class=" rounded-lg p-4">
+            <div class="cursor-pointer" [routerLink]="['/post-details', post.id]">
+                <p class="my-2">{{post.body}}</p>
+                <img [src]="post.image" alt="image post" class="w-full rounded-lg">
+            </div>
+            <button #showComments class="text-emerald-600 cursor-pointer my-4">Show Comments</button>
+        </div>
+        <!-- Comments Section -->
+         <div class="max-h-100 overflow-y-scroll">
+            @defer (on interaction(showComments)) {
+                <app-single-comment [postId]="post.id"></app-single-comment>
+            }
+         </div>
+         <!-- Create Comment -->
+          <div>
+            <form (submit)="createComment($event, post.id)">
+                <label for="chat" class="sr-only">Your message</label>
+                <div class="flex items-center px-3 py-2 rounded-full bg-stone-300">
+                    <textarea [formControl]="commentValue" id="chat" rows="1" class="mx-1 bg-neutral-primary-medium resize-none border border-default-medium text-heading text-sm rounded-base focus:ring-emerald-500 focus:border-emerald-500 block w-full px-3 py-2.5 placeholder:text-body" placeholder="Your message..."></textarea>
+                        <button type="submit" class="bg-white inline-flex justify-center p-2 text-emerald-600 rounded-full cursor-pointer hover:bg-brand-softer">
+                        <svg class="w-6 h-6 rotate-90 rtl:-rotate-90" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m12 18-7 3 7-18 7 18-7-3Zm0 0v-5"/></svg>
+                        <span class="sr-only">Send message</span>
+                    </button>
+                </div>
+            </form>
+          </div>
+    </div>
+</section>
+}

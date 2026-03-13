@@ -1,0 +1,202 @@
+<section class="rounded-lg bg-white p-4 my-2 w-3/4 mx-auto mt-20">
+  <div class="min-h-screen bg-sky-500 bg-gradient p-5 flex-col justify-center rounded-lg">
+    <!-- Cover -->
+    <div class="relative flex flex-col items-center">
+      @if (profileDetails.cover) {
+        <img
+          [src]="profileDetails.cover"
+          alt="cover photo"
+          class="w-full h-64 object-cover rounded-t-lg shadow-md"
+        />
+      } @else {
+        <div class="w-full h-64 bg-gray-300 rounded-lg shadow-md flex items-center justify-center">
+          <span class="text-gray-500 text-xl">No Cover Photo</span>
+        </div>
+      }
+    </div>
+
+    <!-- Profile Info -->
+    <div class="max-w-5xl w-3/4 mx-auto px-6 pt-1 pb-10 bg-white shadow-md rounded-lg mt-5">
+      <!-- Name / Username -->
+      <div class="flex md:items-center aligne-center gap-5 md:justify-center">
+        <!-- Profile Photo -->
+        <div class="mt-5 relative">
+          <img
+            [src]="profileDetails.photo || 'user.png'"
+            alt="profile"
+            class="w-24 h-24 rounded-full border-4 border-white object-cover shadow-lg"
+          />
+          <i #uploadBtn class="fa fa-pen text absolute top-5 right-0 hover:cursor-pointer">
+            @defer (on interaction(uploadBtn)) {
+              <input
+                type="file"
+                name="profile-photo"
+                id="file"
+                (change)="onFileChanged($event)"
+                class="bg-gray-300 text-black text-roboto p-2 rounded-lg shadow-lg"
+              />
+            }
+          </i>
+        </div>
+
+        <div class="mt-7">
+          <h1 class="text-2xl font-bold text-gray-800">
+            {{ profileDetails.name }}
+          </h1>
+
+          <p class="text-gray-500">
+            <i class="fa fa-users me-2"></i>
+            Active on fakebook
+          </p>
+
+          <p class="text-gray-500">
+            <i class="fa fa-envelope me-2"></i>
+            {{ profileDetails.email }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="flex justify-around gap-5 mt-3 pt-3">
+        <div class="text-center bg-gray-200 rounded-lg p-4 shadow">
+          <p class="text-xl font-semibold">
+            {{ profileDetails.followersCount || 0 }}
+          </p>
+          <p class="text-gray-500 text-sm">Followers</p>
+        </div>
+
+        <div class="text-center bg-gray-200 rounded-lg p-4 shadow">
+          <p class="text-xl font-semibold">
+            {{ profileDetails.followingCount || 0 }}
+          </p>
+          <p class="text-gray-500 text-sm">Following</p>
+        </div>
+
+        <div class="text-center bg-gray-200 rounded-lg p-4 shadow">
+          <p class="text-xl font-semibold">
+            {{ profileDetails.bookmarksCount || 0 }}
+          </p>
+          <p class="text-gray-500 text-sm">Bookmarks</p>
+        </div>
+      </div>
+
+      <!-- Extra Info -->
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8 shadow-lg p-4 rounded-lg bg-gray-200 text-center"
+      >
+        <div>
+          <p class="text-gray-500 text-sm">Gender</p>
+          <p class="font-medium">{{ profileDetails.gender }}</p>
+        </div>
+
+        <div>
+          <p class="text-gray-500 text-sm">Date of Birth</p>
+          <p class="font-medium">{{ profileDetails.dateOfBirth | date: 'mediumDate' }}</p>
+        </div>
+
+        <div>
+          <p class="text-gray-500 text-sm">Account Created</p>
+          <p class="font-medium">{{ profileDetails.createdAt | date: 'mediumDate' }}</p>
+        </div>
+
+        <div>
+          <p class="text-gray-500 text-sm">Password Changed</p>
+          <p class="font-medium">{{ profileDetails.passwordChangedAt | date: 'mediumDate' }}</p>
+        </div>
+
+        <div class="flex gap-2 justify-around">
+          <button
+            class="mx-auto bg-white rounded-lg shadow px-5 py-2 hover:cursor-pointer hover:bg-gray-100"
+          >
+            My Posts
+          </button>
+          <button
+            class="mx-auto bg-white rounded-lg shadow px-5 py-2 hover:cursor-pointer hover:bg-gray-100"
+          >
+            Bookmarks
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+@for (post of userPosts; track post.id) {
+  <section class="rounded-lg bg-white p-4 my-2 sm:w-4/5 md:w-1/2 mx-auto">
+    <div class="flex flex-col">
+      <div class="flex gap-2 justify-between">
+        <div class="flex items-center gap-2">
+          <img [src]="post.user.photo" alt="user profile" class="size-12 rounded-full" />
+          <div>
+            <h3 class="font-bold">{{ post.user.name }}</h3>
+            <p class="text-sm text-gray-500">{{ post.createdAt | date: 'short' }}</p>
+          </div>
+        </div>
+        <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <!-- Modal toggle -->
+          <button
+            type="button"
+            class="flex text-sm rounded-full md:me-0 focus:ring-4 focus:ring-sky-300"
+            id="post-dropdown-button"
+            aria-expanded="false"
+            data-dropdown-toggle="static-modal"
+            data-dropdown-placement="bottom"
+          >
+            <i class="fa-solid fa-ellipsis"></i>
+          </button>
+
+          <!-- Main modal -->
+          <div
+            id="static-modal"
+            class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
+          >
+            <div class="relative p-4 w-full max-w-2xl max-h-full">
+              <!-- Modal content -->
+              <div
+                class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6"
+              >
+                <ul class="p-2 text-sm text-body font-medium" aria-labelledby="post-dropdown-button">
+                  <li>
+                    <a
+                      (click)="bookmarkPost(post.id)"
+                      class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                      >Save Post</a
+                    >
+                  </li>
+                  <li>
+                    <a
+                      [routerLink]="['/update-post', post.id]"
+                      class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                      >Update Post</a
+                    >
+                  </li>
+                  @if (post.user._id === profileDetails._id) {
+                    <li>
+                      <a
+                        (click)="deletePost(post.id)"
+                        class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:cursor-pointer hover:text-heading rounded"
+                        >Delete Post</a
+                      >
+                    </li>
+                  }
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="rounded-lg p-4">
+        <div class="cursor-pointer" [routerLink]="['/post-details', post.id]">
+          <p class="my-2">{{ post.body }}</p>
+          <img [src]="post.image" alt="image post" class="w-full rounded-lg" />
+        </div>
+        <button #showComments class="text-emerald-600 cursor-pointer my-4">Show Comments</button>
+      </div>
+      <!-- Comments Section -->
+      <div class="max-h-100 overflow-y-scroll">
+        @defer (on interaction(showComments)) {
+          <app-single-comment [postId]="post.id"></app-single-comment>
+        }
+      </div>
+    </div>
+  </section>
+}

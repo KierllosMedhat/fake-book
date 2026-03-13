@@ -1,0 +1,18 @@
+export interface Iprofile {
+      _id: string,
+      name: string,
+      username: string,
+      email: string,
+      dateOfBirth: Date,
+      gender: string,
+      photo: string,
+      cover: string,
+      bookmarks: [],
+      followers: [],
+      following: [],
+      createdAt: Date,
+      passwordChangedAt: Date,
+      followersCount: number,
+      followingCount: number,
+      bookmarksCount: number,
+}
