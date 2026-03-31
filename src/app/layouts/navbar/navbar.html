@@ -8,11 +8,10 @@
         type="button"
         class="flex text-sm bg-sky-500 rounded-full md:me-0 focus:ring-4 focus:ring-sky-300"
         id="user-menu-button"
-        aria-expanded="false"
+        aria-expanded="true"
         data-dropdown-toggle="user-dropdown"
         data-dropdown-placement="bottom"
       >
-        <span class="sr-only">Open user menu</span>
         <img class="w-10 h-10 rounded-full shadow-lg" src="user.png" alt="user photo" />
       </button>
       <!-- Dropdown menu -->
@@ -20,12 +19,6 @@
         class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
         id="user-dropdown"
       >
-       @if (isLoggedIn){
-         <div class="px-4 py-3 text-sm border-b border-default">
-           <span class="block text-heading font-medium">user</span>
-           <span class="block text-body truncate">user@linkedposts.com</span>
-         </div>
-       }
         <ul class="p-2 text-sm text-body font-medium" aria-labelledby="user-menu-button">
           @if (isLoggedIn) {
             <li>
