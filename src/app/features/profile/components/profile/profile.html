@@ -120,8 +120,9 @@
     </div>
   </div>
 </section>
+
 @for (post of userPosts; track post.id) {
-  <section class="rounded-lg bg-white p-4 my-2 sm:w-4/5 md:w-1/2 mx-auto">
+  <section class="rounded-lg bg-white p-4 my-2 sm:w-4/5 md:w-3/4 mx-auto">
     <div class="flex flex-col">
       <div class="flex gap-2 justify-between">
         <div class="flex items-center gap-2">
@@ -132,29 +133,12 @@
           </div>
         </div>
         <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          <!-- Modal toggle -->
-          <button
-            type="button"
-            class="flex text-sm rounded-full md:me-0 focus:ring-4 focus:ring-sky-300"
-            id="post-dropdown-button"
-            aria-expanded="false"
-            data-dropdown-toggle="static-modal"
-            data-dropdown-placement="bottom"
-          >
+          <button matButton [matMenuTriggerFor]="menu">
             <i class="fa-solid fa-ellipsis"></i>
           </button>
-
-          <!-- Main modal -->
-          <div
-            id="static-modal"
-            class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
-          >
-            <div class="relative p-4 w-full max-w-2xl max-h-full">
-              <!-- Modal content -->
-              <div
-                class="relative bg-neutral-primary-soft border border-default rounded-base shadow-sm p-4 md:p-6"
-              >
-                <ul class="p-2 text-sm text-body font-medium" aria-labelledby="post-dropdown-button">
+          
+          <mat-menu #menu="matMenu">
+            <ul class="p-2 text-sm text-body font-medium" aria-labelledby="post-dropdown-button">
                   <li>
                     <a
                       (click)="bookmarkPost(post.id)"
@@ -179,9 +163,7 @@
                     </li>
                   }
                 </ul>
-              </div>
-            </div>
-          </div>
+          </mat-menu>
         </div>
       </div>
       <div class="rounded-lg p-4">

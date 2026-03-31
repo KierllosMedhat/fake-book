@@ -3,21 +3,13 @@
     <a routerLink="/timeline" class="flex items-center space-x-3 rtl:space-x-reverse">
       <span class="self-center text-3xl text-white font-bold whitespace-nowrap font-sans">fakebook</span>
     </a>
-    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-      <button
-        type="button"
-        class="flex text-sm bg-sky-500 rounded-full md:me-0 focus:ring-4 focus:ring-sky-300"
-        id="user-menu-button"
-        aria-expanded="true"
-        data-dropdown-toggle="user-dropdown"
-        data-dropdown-placement="bottom"
-      >
-        <img class="w-10 h-10 rounded-full shadow-lg" src="user.png" alt="user photo" />
-      </button>
-      <!-- Dropdown menu -->
+    <button matButton [matMenuTriggerFor]="menu">
+      <img class="w-10 h-10 rounded-full shadow-lg" src="user.png" alt="user photo" />
+    </button>
+    <mat-menu nclass="z-50 bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44" #menu="matMenu">
+<!-- Dropdown menu -->
       <div
-        class="z-50 hidden bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44"
-        id="user-dropdown"
+
       >
         <ul class="p-2 text-sm text-body font-medium" aria-labelledby="user-menu-button">
           @if (isLoggedIn) {
@@ -63,6 +55,6 @@
           }
         </ul>
       </div>
-    </div>
+    </mat-menu>
   </div>
 </nav>

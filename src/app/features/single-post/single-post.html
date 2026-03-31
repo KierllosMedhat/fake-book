@@ -9,9 +9,29 @@
                     <p class="text-sm text-gray-500">{{post.createdAt | date:'short'}}</p>
                 </div>
             </div>
-            <div>
-                <i class="fa-solid fa-ellipsis"></i>
-            </div>
+                    <div class="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+          <button matButton [matMenuTriggerFor]="menu">
+            <i class="fa-solid fa-ellipsis"></i>
+          </button>
+          
+          <mat-menu #menu="matMenu">
+            <ul class="p-2 text-sm text-body font-medium" aria-labelledby="post-dropdown-button">
+                  <li>
+                    <button 
+                      (click)="bookmarkPost(post.id)"
+                      class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                      >Save Post</button>
+                  </li>
+                  <li>
+                    <a
+                      [routerLink]="['/update-post', post.id]"
+                      class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                      >Update Post</a
+                    >
+                  </li>
+                </ul>
+          </mat-menu>
+        </div>
         </div>
         <div class=" rounded-lg p-4">
             <div class="cursor-pointer" [routerLink]="['/post-details', post.id]">

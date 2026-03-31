@@ -39,11 +39,11 @@ export class Posts {
   }
 
   bookmarkPost(postId:any): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + '/posts/' + postId + '/bookmark', {});
+    return this.httpClient.put(environment.baseUrl + '/posts/' + postId + '/bookmark', {});
   }
 
   likePost(postId:any): Observable<any> {
-    return this.httpClient.post(environment.baseUrl + '/posts/' + postId + '/like', {});
+    return this.httpClient.put(environment.baseUrl + '/posts/' + postId + '/like', {});
   }
   
 

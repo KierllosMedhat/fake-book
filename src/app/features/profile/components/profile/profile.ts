@@ -9,11 +9,13 @@ import { Posts } from '../../../../core/services/posts/posts';
 import { Ipost } from '../../../../core/models/ipost';
 import { SingleComment } from '../../../comments/components/single-comment/single-comment';
 import { initFlowbite } from 'flowbite';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @Component({
   selector: 'app-profile',
-  imports: [DatePipe, ReactiveFormsModule, RouterLink, SingleComment],
+  imports: [DatePipe, ReactiveFormsModule, RouterLink, SingleComment, MatMenuModule, MatButtonModule],
   templateUrl: './profile.html',
   styleUrl: './profile.css',
 })
