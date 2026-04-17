@@ -3,13 +3,13 @@ import {provideNativeDateAdapter} from '@angular/material/core';
 import {FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { initFlowbite } from 'flowbite';
 import { AuthService } from '../../services/auth/auth-service';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-signup',
   templateUrl: './signup.html',
   providers: [provideNativeDateAdapter()],
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, RouterLink],
   styleUrl: './signup.css',
 })
 export class Signup {

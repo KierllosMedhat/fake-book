@@ -1,4 +1,4 @@
-<div class="min-h-screen flex flex-col items-center justify-center mt-16">
+<!-- <div class="min-h-screen flex flex-col items-center justify-center mt-16">
   <h1 class="my-5 text-center text-4xl font-semibold text-sky-500">the fakebook</h1>
   <div class="bg-white shadow-lg rounded-xl p-8 max-w-2xl w-full">
     <h2 class="text-2xl text-sky-500 py-3">Register Now</h2>
@@ -168,6 +168,307 @@
           <span><i class="fa-solid fa-spinner fa-spin"></i></span>
         }
       </button>
+      <a
+        [routerLink]="'/signin'"
+        class="text-sky-500 ms-3"
+        >Already a member ?</a
+      >
     </form>
+  </div>
+</div> -->
+<div
+  class="min-h-screen bg-[#f0f2f5] px-4 py-8 sm:py-12 lg:flex lg:items-center"
+  style="font-family: Cairo, sans-serif"
+>
+  <div
+    class="mx-auto flex w-full max-w-6xl flex-col items-center gap-6 sm:gap-8 lg:flex-row lg:items-center lg:justify-between"
+  >
+    <section class="order-1 w-full max-w-[430px] mx-auto">
+      <div class="rounded-2xl bg-white p-4 sm:p-6">
+        <div class="mb-4 text-center">
+          <h1 class="text-5xl font-semibold tracking-tight text-[#00298d]">fakebook</h1>
+          <p class="mt-1 text-2xl font-medium leading-snug text-slate-700">
+            Connect with friends and the world around you on fakebook.
+          </p>
+        </div>
+        <div class="mb-5 grid grid-cols-2 rounded-xl bg-slate-100 p-1">
+          <button
+            routerLink="/signin"
+            type="button"
+            class="rounded-lg py-2 text-sm font-extrabold transition text-slate-600 hover:text-slate-800"
+          >
+            Login</button
+          ><button
+            type="button"
+            class="rounded-lg py-2 text-sm font-extrabold transition bg-white text-[#00298d] shadow-sm"
+          >
+            Register
+          </button>
+        </div>
+        <h2 class="text-2xl font-extrabold text-slate-900">Create a new account</h2>
+        <p class="mt-1 text-sm text-slate-500">It is quick and easy.</p>
+        <form class="mt-5 space-y-3.5" [formGroup]="registerForm" (ngSubmit)="signUp()">
+          <div>
+            <div class="relative">
+              <span
+                class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-user"
+                  aria-hidden="true"
+                >
+                  <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+                  <circle cx="12" cy="7" r="4"></circle></svg></span
+              ><input
+                placeholder="Full name"
+                class="w-full rounded-xl border bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:bg-white border-slate-200 focus:border-[#00298d]"
+                type="text"
+                name="name"
+                formControlName="name"
+              />
+              @let nameControl = registerForm.get('name');
+        @if (nameControl?.invalid && nameControl?.touched) {
+          <ul>
+            @if (nameControl?.hasError('required')) {
+              <li class="text-red-500 text-sm">Name is required.</li>
+            }
+            @if (nameControl?.hasError('minlength')) {
+              <li class="text-red-500 text-sm">Name must be at least 3 characters long.</li>
+            }
+            @if (nameControl?.hasError('maxlength')) {
+              <li class="text-red-500 text-sm">Name must be less than 50 characters long.</li>
+            }
+          </ul>
+        }
+            </div>
+          </div>
+          <div>
+            <div class="relative">
+              <span
+                class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-at-sign"
+                  aria-hidden="true"
+                >
+                  <circle cx="12" cy="12" r="4"></circle>
+                  <path d="M16 8v5a3 3 0 0 0 6 0v-1a10 10 0 1 0-4 8"></path></svg></span
+              ><input
+                placeholder="Email address"
+                class="w-full rounded-xl border bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:bg-white border-slate-200 focus:border-[#00298d]"
+                type="email"
+                name="email"
+                formControlName="email"
+              />
+                      @let emailControl = registerForm.get('email');
+        @if (emailControl?.invalid && emailControl?.touched) {
+          <ul>
+            @if (emailControl?.hasError('required')) {
+              <li class="text-red-500 text-sm">Email is required.</li>
+            }
+            @if (emailControl?.hasError('email')) {
+              <li class="text-red-500 text-sm">Please enter a valid email address.</li>
+            }
+          </ul>
+        }
+            </div>
+          </div>
+          <div>
+            <div class="flex flex-row w-full rounded-xl border bg-slate-50 p-3 text-sm text-slate-800 outline-none transition focus:bg-white border-slate-200 focus:border-[#00298d]">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="18"
+                height="18"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                class="lucide lucide-users pointer-events-none left-3 top-1/2 me-3 text-slate-400"
+                aria-hidden="true"
+              >
+                <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path>
+                <path d="M16 3.128a4 4 0 0 1 0 7.744"></path>
+                <path d="M22 21v-2a4 4 0 0 0-3-3.87"></path>
+                <circle cx="9" cy="7" r="4"></circle>
+                </svg>
+      <div class="flex flex-row gap-4">
+        <div class="flex items-center">
+          <input
+            id="default-radio-1"
+            type="radio"
+            value="male"
+            name="gender"
+            formControlName="gender"
+            class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border appearance-none"
+          />
+          <label for="default-radio-1" class="select-none ms-2 text-sm font-medium text-heading"
+            >Male</label
+          >
+        </div>
+        <div class="flex items-center">
+          <input
+            checked
+            id="default-radio-2"
+            type="radio"
+            value="female"
+            name="gender"
+            formControlName="gender"
+            class="w-4 h-4 text-neutral-primary border-default-medium bg-neutral-secondary-medium rounded-full checked:border-brand focus:ring-2 focus:outline-none focus:ring-brand-subtle border appearance-none"
+          />
+          <label for="default-radio-2" class="select-none ms-2 text-sm font-medium text-heading"
+            >Female</label
+          >
+        </div>
+      </div>
+            </div>
+          </div>
+          <div>
+            <div class="relative">
+              <span
+                class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-calendar"
+                  aria-hidden="true"
+                >
+                  <path d="M8 2v4"></path>
+                  <path d="M16 2v4"></path>
+                  <rect width="18" height="18" x="3" y="4" rx="2"></rect>
+                  <path d="M3 10h18"></path></svg></span
+              ><input
+                placeholder="Date of birth"
+                class="w-full rounded-xl border bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:bg-white border-slate-200 focus:border-[#00298d]"
+                type="date"
+                name="dateOfBirth"
+                formControlName="dateOfBirth"
+              />
+            </div>
+          </div>
+          <div>
+            <div class="relative">
+              <span
+                class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-key-round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
+                  ></path>
+                  <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle></svg></span
+              ><input
+                placeholder="Password"
+                class="w-full rounded-xl border bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:bg-white border-slate-200 focus:border-[#00298d]"
+                type="password"
+                name="password"
+                formControlName="password"
+              />
+              @let passwordControl = registerForm.get('password');
+        @if (passwordControl?.invalid && passwordControl?.touched) {
+          <ul>
+            @if (passwordControl?.hasError('required')) {
+              <li class="text-red-500 text-sm">Password is required.</li>
+            }
+            @if (passwordControl?.hasError('pattern')) {
+              <li class="text-red-500 text-sm">
+                Password must contain at least one uppercase letter, one lowercase letter, one
+                number, and one special character.
+              </li>
+            }
+          </ul>
+        }
+            </div>
+          </div>
+          <div>
+            <div class="relative">
+              <span
+                class="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                ><svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  class="lucide lucide-key-round"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
+                  ></path>
+                  <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle></svg></span
+              ><input
+                placeholder="Confirm password"
+                class="w-full rounded-xl border bg-slate-50 py-3 pl-11 pr-4 text-sm text-slate-800 outline-none transition focus:bg-white border-slate-200 focus:border-[#00298d]"
+                type="password"
+                name="rePassword"
+                formControlName="rePassword"
+              />
+                      @let rePasswordControl = registerForm.get('rePassword');
+        @if (
+          (rePasswordControl?.invalid || registerForm.hasError('mismatch')) &&
+          rePasswordControl?.touched
+        ) {
+          <ul>
+            @if (rePasswordControl?.hasError('required')) {
+              <li class="text-red-500 text-sm">Confirm password is required.</li>
+            }
+            @if (registerForm.hasError('mismatch')) {
+              <li class="text-red-500 text-sm">Passwords do not match.</li>
+            }
+          </ul>
+        }
+            </div>
+          </div>
+          <button
+            [disabled]="registerForm.invalid"
+            class="w-full rounded-xl py-3 text-base font-extrabold text-white transition disabled:opacity-60 disabled:cursor-not-allowed bg-[#00298d] hover:bg-[#001f6b]"
+          >
+            Create New Account
+          </button>
+          @if (isLoading) {
+            <span class="text-center"><i class="fa-solid fa-spinner fa-spin"></i></span>
+          }
+        </form>
+      </div>
+    </section>
   </div>
 </div>

@@ -1,18 +1,17 @@
-<nav class="bg-sky-500 fixed w-full z-20 top-0 border-b border-default">
+<!-- <nav class="bg-sky-500 fixed w-full z-20 top-0 border-b border-default">
   <div class="max-w-7xl flex flex-wrap items-center justify-between mx-auto p-4">
     <a routerLink="/timeline" class="flex items-center space-x-3 rtl:space-x-reverse">
       <span class="self-center text-3xl text-white font-bold whitespace-nowrap font-sans">fakebook</span>
     </a>
+    @if (isLoggedIn) {
     <button matButton [matMenuTriggerFor]="menu">
       <img class="w-10 h-10 rounded-full shadow-lg" src="user.png" alt="user photo" />
     </button>
     <mat-menu nclass="z-50 bg-neutral-primary-medium border border-default-medium rounded-base shadow-lg w-44" #menu="matMenu">
-<!-- Dropdown menu -->
       <div
 
       >
         <ul class="p-2 text-sm text-body font-medium" aria-labelledby="user-menu-button">
-          @if (isLoggedIn) {
             <li>
               <a
                 [routerLink]="'/profile'"
@@ -34,27 +33,205 @@
                 >Change Password
               </a>
             </li>
-          }
-          @if (!isLoggedIn) {
+          </ul>
+        </div>
+      </mat-menu>
+    }
+  </div>
+</nav> 
+-->
+<header class="sticky top-0 z-40 border-b border-slate-200/90 bg-white/95 backdrop-blur">
+  <div
+    class="mx-auto flex max-w-7xl items-center justify-between gap-2 px-2 py-1.5 sm:gap-3 sm:px-3"
+  >
+    <div class="flex items-center gap-3">
+      <a routerLink="/timeline" class="hidden text-3xl font-extrabold text-slate-900 sm:block"
+        >fakebook</a
+      >
+    </div>
+    <nav
+      class="flex min-w-0 items-center gap-1 overflow-x-auto rounded-2xl border border-slate-200 bg-slate-50/90 px-1 py-1 sm:px-1.5"
+    >
+      <a
+        aria-current="page"
+        class="relative flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-extrabold transition sm:gap-2 sm:px-3.5 hover:bg-white/60 hover:text-slate-900 text-slate-600"
+        routerLink="/timeline"
+        routerLinkActive="bg-slate-600 text-white"
+        data-discover="true"
+        ><span class="relative"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-house"
+            aria-hidden="true"
+          >
+            <path d="M15 21v-8a1 1 0 0 0-1-1h-4a1 1 0 0 0-1 1v8"></path>
+            <path
+              d="M3 10a2 2 0 0 1 .709-1.528l7-6a2 2 0 0 1 2.582 0l7 6A2 2 0 0 1 21 10v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
+            ></path></svg></span
+        ><span class="hidden sm:inline">Timeline</span
+        ><span class="sr-only sm:hidden">Timeline</span></a
+      >
+      <a
+        class="relative flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-extrabold transition sm:gap-2 sm:px-3.5 text-slate-600 hover:bg-white/90 hover:text-slate-900"
+        routerLink="/profile"
+        routerLinkActive="bg-slate-600 text-white"
+        data-discover="true"
+        ><span class="relative"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-user"
+            aria-hidden="true"
+          >
+            <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+            <circle cx="12" cy="7" r="4"></circle></svg></span
+        ><span class="hidden sm:inline">Profile</span
+        ><span class="sr-only sm:hidden">Profile</span></a
+      ><a
+        class="relative flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-extrabold transition sm:gap-2 sm:px-3.5 text-slate-600 hover:bg-white/90 hover:text-slate-900"
+        routerLink="/notifications"
+        routerLinkActive="bg-slate-600 text-white"
+        data-discover="true"
+        ><span class="relative"
+          ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="20"
+            height="20"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-message-circle"
+            aria-hidden="true"
+          >
+            <path
+              d="M2.992 16.342a2 2 0 0 1 .094 1.167l-1.065 3.29a1 1 0 0 0 1.236 1.168l3.413-.998a2 2 0 0 1 1.099.092 10 10 0 1 0-4.777-4.719"
+            ></path></svg></span
+        ><span class="hidden sm:inline">Notifications</span
+        ><span class="sr-only sm:hidden">Notifications</span></a
+      >
+      <a
+          routerLinkActive="bg-slate-600 text-white"
+          routerLink="/community"
+          class="mt-1 flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold transition text-slate-700 hover:bg-white/60 hover:cursor-pointer"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-earth"
+            aria-hidden="true"
+          >
+            <path d="M21.54 15H17a2 2 0 0 0-2 2v4.54"></path>
+            <path
+              d="M7 3.34V5a3 3 0 0 0 3 3a2 2 0 0 1 2 2c0 1.1.9 2 2 2a2 2 0 0 0 2-2c0-1.1.9-2 2-2h3.17"
+            ></path>
+            <path d="M11 21.95V18a2 2 0 0 0-2-2a2 2 0 0 1-2-2v-1a2 2 0 0 0-2-2H2.05"></path>
+            <circle cx="12" cy="12" r="10"></circle>
+            </svg>Community</a
+        ><a
+            routerLinkActive="bg-slate-600 text-white"
+            routerLink="/saved"
+          class="mt-1 flex w-full items-center gap-3 rounded-xl px-3 py-2 text-left text-sm font-bold transition text-slate-700 hover:bg-white/60 hover:cursor-pointer"
+        ><svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="17"
+            height="17"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-bookmark"
+            aria-hidden="true"
+          >
+            <path
+              d="M17 3a2 2 0 0 1 2 2v15a1 1 0 0 1-1.496.868l-4.512-2.578a2 2 0 0 0-1.984 0l-4.512 2.578A1 1 0 0 1 5 20V5a2 2 0 0 1 2-2z"
+            ></path>
+            </svg>
+            Saved
+          </a>
+    </nav>
+    <div class="relative">
+      <button
+        class="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-2 py-1.5 transition hover:bg-white/60"
+      >
+        <img
+          alt="{{userData()?.name}}"
+          class="h-8 w-8 rounded-full object-cover"
+          [src]="userData()?.photo"
+        /><span class="hidden max-w-[140px] truncate text-sm font-semibold text-slate-800 md:block"
+          >{{userData()?.name}}</span
+        ><svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="15"
+          height="15"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-menu text-slate-500 hover:cursor-pointer"
+          aria-hidden="true"
+          matButton [matMenuTriggerFor]="menu"
+        >
+          <path d="M4 5h16"></path>
+          <path d="M4 12h16"></path>
+          <path d="M4 19h16"></path>
+        </svg>
+      </button>
+    <mat-menu class="z-50 bg-white border border-default-medium rounded-base shadow-lg w-44" #menu="matMenu">
+      <div>
+        <ul class="text-sm text-body font-medium" aria-labelledby="user-menu-button">
             <li>
               <a
-                [routerLink]="'/signin'"
+                [routerLink]="'/profile'"
                 class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                >Sign In</a
+                >Profile</a
               >
             </li>
-            
 
             <li>
               <a
-                [routerLink]="'/signup'"
-                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
-                >Register</a
+                (click)="logOut()"
+                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:cursor-pointer hover:text-heading rounded"
+                >Sign Out</a
               >
             </li>
-          }
-        </ul>
-      </div>
-    </mat-menu>
+            <li>
+              <a [routerLink]="'/change-password'" 
+                class="inline-flex items-center w-full p-2 hover:bg-neutral-tertiary-medium hover:text-heading rounded"
+                >Change Password
+              </a>
+            </li>
+          </ul>
+        </div>
+      </mat-menu>
+    </div>
   </div>
-</nav>
+</header>

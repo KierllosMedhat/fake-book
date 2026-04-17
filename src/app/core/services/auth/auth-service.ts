@@ -30,6 +30,10 @@ export class AuthService {
   }
 
   getProfile(): Observable<any> {
-    return this.httpClient.get(environment.baseUrl + '/users/profile-data');
+    return this.httpClient.get(environment.baseUrl + '/users/profile-data', {
+      headers: {
+        Authorization: `Bearer ${localStorage.getItem('token')}`,
+      },
+    });
   }
 }
