@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, OnInit, signal, WritableSignal } from '@angular/core';
 import { Posts } from '../../core/services/posts/posts';
 import { Ipost } from '../../core/models/ipost';
 import { SingleComment } from '../comments/components/single-comment/single-comment';
@@ -9,6 +9,8 @@ import { ToastrService } from 'ngx-toastr';
 import { DatePipe } from '@angular/common';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
+import { AuthService } from '../../core/services/auth/auth-service';
+import { Iuser } from '../../core/models/iuser';
 
 @Component({
   selector: 'app-single-post',
@@ -19,6 +21,9 @@ import { MatButtonModule } from '@angular/material/button';
 export class SinglePost implements OnInit{
   private readonly postsService = inject(Posts);
   private readonly commentService = inject(Comments);
+  private readonly authService = inject(AuthService);
+
+  user: WritableSignal<Iuser>=signal({} as Iuser)
   isLoading: boolean = false;
   ErrorMsg: string = '';
   
@@ -27,6 +32,7 @@ export class SinglePost implements OnInit{
   
   ngOnInit(): void{
     this.getAllPosts();
+    this.getLoggedUser();
   }
 
   getAllPosts() {
@@ -34,10 +40,23 @@ export class SinglePost implements OnInit{
     this.postsService.getAllPosts().subscribe({
       next: (posts) => {
         this.postsList = posts.data.posts;
+        console.log(this.postsList);
         this.isLoading = false;
       },
       error: (error) => {        
-        console.error('Error fetching posts:', error);
+        this.ErrorMsg = error.error.message;
+        this.isLoading = false;
+      }
+    });
+  }
+
+  getLoggedUser() {
+    this.authService.getProfile().subscribe({
+      next: (user) => {
+        this.user.set(user.data.user);
+      },
+      error: (error) => {
+        this.ErrorMsg = error.error.message;
       }
     });
   }
@@ -70,6 +89,22 @@ export class SinglePost implements OnInit{
         error: (error) => {
           console.error('Error bookmarking post:', error);
           this.ErrorMsg = 'Failed to bookmark post.';
+          this.isLoading = false;
+        },
+      });
+    }
+  }
+
+  likePost(postId: string) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.isLoading = true;
+      this.postsService.likePost(postId).subscribe({
+        next: (response) => {
+          this.isLoading = false;
+        },
+        error: (error) => {
+          this.ErrorMsg = 'Failed to like post.';
           this.isLoading = false;
         },
       });

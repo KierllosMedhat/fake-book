@@ -1,10 +1,11 @@
 import { Component, inject, Input, OnInit } from '@angular/core';
+import { DatePipe } from '@angular/common';
 import { Comments } from '../../../../core/services/comments/comments';
 import { Icomment } from '../../../../core/models/icomment';
 
 @Component({
   selector: 'app-single-comment',
-  imports: [],
+  imports: [DatePipe],
   templateUrl: './single-comment.html',
   styleUrl: './single-comment.css',
 })
@@ -26,5 +27,19 @@ export class SingleComment implements OnInit {
       console.error(err);
     }
   )
+  }
+
+  likeComment(commentId: string) {
+    const token = localStorage.getItem('token');
+    if (token) {
+      this.commentService.likeComment(commentId).subscribe({
+        next: (response) => {
+          this.getComments();
+        },
+        error: (error) => {
+          console.error(error);
+        },
+      });
+    }
   }
 }
